@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
 import ParallaxScrollView from "@/components/parallax-scroll-view";
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
   return (
@@ -18,6 +19,7 @@ export default function HomeScreen() {
       <View className="flex-1 items-center justify-center bg-white">
         <Text className="text-xl font-bold text-blue-500">
           Welcome to Nativewind!
+          <Link href={'/login'} className="font-semibold">Sign Up</Link>
         </Text>
       </View>
     </ParallaxScrollView>
