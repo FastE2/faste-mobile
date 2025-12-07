@@ -1,6 +1,7 @@
 import { emailSchema, registerSchema } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { Link } from "expo-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -258,6 +259,30 @@ export default function RegisterScreen() {
               </Pressable>
             </>
           )}
+          <Text className="mt-8 text-sm text-center text-gray-500">
+            By signing up, you agree to our{" "}
+            <Text
+              className="text-blue-500 underline"
+              onPress={() => console.log("Terms pressed")}
+            >
+              Terms of Service
+            </Text>{" "}
+            and{" "}
+            <Text
+              className="text-blue-500 underline"
+              onPress={() => console.log("Privacy pressed")}
+            >
+              Privacy Policy
+            </Text>
+          </Text>
+          <Pressable className="mt-8 mb-10">
+            <Text className="text-center text-gray-700">
+              Already have an account?{" "}
+              <Link href={"/login"} className="font-semibold">
+                Sign in now
+              </Link>
+            </Text>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

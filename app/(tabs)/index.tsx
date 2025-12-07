@@ -1,46 +1,38 @@
-import "@/global.css";
-import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
-
-import ParallaxScrollView from "@/components/parallax-scroll-view";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Link } from "expo-router";
+import React from "react";
+import { ScrollView, Text, TextInput, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
+    <View className="flex-1 bg-white">
+      {/* Sticky Header */}
+      <View className="h-30 flex-row items-center justify-between px-4 pt-14 pb-4 bg-blue-400 border-b border-gray-200 z-50">
+        <TextInput
+          placeholder="Enter your name"
+          className="border border-gray-300 rounded-xl px-3 py-2 w-[80%]"
         />
-      }
-    >
-      <View className="flex-1 items-center justify-center bg-white">
-        <Text className="text-xl font-bold text-blue-500">
-          Welcome to Nativewind!
-          <Link href={'/login'} className="font-semibold">Sign Up</Link>
-        </Text>
+        <View className="flex-row items-center justify-center gap-x-4 flex-1">
+          <Link href={"/cart"}>
+            <IconSymbol size={28} name={"cart"} color={"white"} />
+          </Link>
+          <Link href={"/chat"}>
+            <IconSymbol size={28} name={"message"} color={"white"} />
+          </Link>
+        </View>
       </View>
-    </ParallaxScrollView>
+
+      {/* Scrollable content */}
+      <ScrollView
+        contentContainerStyle={{ padding: 16 }}
+        showsVerticalScrollIndicator={false}
+      >
+        {Array.from({ length: 30 }).map((_, i) => (
+          <View key={i} className="p-4 mb-4 bg-gray-100 rounded-lg">
+            <Text>Item {i + 1}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-});

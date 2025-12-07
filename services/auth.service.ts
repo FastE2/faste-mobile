@@ -37,7 +37,7 @@ export const sendOTP = async (data: any) => {
   }
 };
 
-export const refreshToken = async (): Promise<ApiResponse> => {
+export const refreshToken = async () => {
   try {
     const res = await axios.post(
       `${API_ENDPOINT.AUTH.REFRESH_TOKEN}`,

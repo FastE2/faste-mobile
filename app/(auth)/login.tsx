@@ -103,9 +103,9 @@ export default function LoginScreen() {
 
           {/* Forgot password */}
           <Pressable className="mt-4">
-            <Text className="text-center text-gray-600">
+            <Link href={'/forgot-password'} className="text-center text-gray-600">
               Forgot your password?
-            </Text>
+            </Link>
           </Pressable>
 
           {/* Divider */}
