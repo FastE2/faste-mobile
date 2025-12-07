@@ -38,7 +38,7 @@ export default function CartProduct({ data }: CartProductProps) {
   };
 
   return (
-    <Link href={`/`} asChild>
+    <Link href={`/product/${data.slugId}`} asChild>
       <Pressable
         className={`bg-white rounded-lg overflow-hidden border border-gray-200 w-50 h-80`}
       >

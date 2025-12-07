@@ -1,6 +1,9 @@
 import BannerHomeScreen from "@/components/BannerHomeScreen";
 import CartProduct from "@/components/CartProduct";
+import LoadingOverlay from "@/components/LoadingOverlay";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { usePublicProducts } from "@/hooks/queries/use-public-products";
+import { keepPreviousData } from "@tanstack/react-query";
 import { Link } from "expo-router";
 import React from "react";
 import {
@@ -30,8 +33,23 @@ export const mockProduct = Array.from({ length: 20 }).map((_, i) => ({
 }));
 
 export default function HomeScreen() {
+  const { data: dataProducts, isLoading } = usePublicProducts(
+    {
+      page: 1,
+      limit: 10,
+    },
+    {
+      select: (data) => data.data.data,
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      placeholderData: keepPreviousData,
+    }
+  );
+
   return (
     <View className="flex-1 bg-white">
+      {isLoading && <LoadingOverlay visible={true} />}
       {/* Sticky Header */}
       <SafeAreaView className="bg-blue-500 z-50 sticky top-0">
         <View className="flex-row items-center px-4 py-2 border-b border-blue-600">
@@ -63,7 +81,7 @@ export default function HomeScreen() {
       </SafeAreaView>
 
       <FlatList
-        data={mockProduct}
+        data={dataProducts ?? mockProduct}
         keyExtractor={(item) => item.slugId}
         numColumns={2}
         showsVerticalScrollIndicator={false}

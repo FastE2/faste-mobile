@@ -17,3 +17,15 @@ export const getAllProductsPublic = async (
     return handleErrorResponse(error);
   }
 };
+
+export const getDetailProductPublicBySlug = async (slugId: string) => {
+  try {
+    const res = await axios.get(
+      `${API_ENDPOINT.MANAGE_PRODUCT.PRODUCT.PUBLIC}/slug/${slugId}`
+    );
+
+    return handleApiResponse(res.data);
+  } catch (error) {
+    return handleErrorResponse(error);
+  }
+};
